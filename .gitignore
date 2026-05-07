@@ -1,0 +1,8 @@
+/target
+**/*.rs.bk
+Cargo.lock
+.DS_Store
+node_modules
+firenotes-ui/dist
+firenotes-ui/.svelte-kit
+firenotes-ui/node_modules
