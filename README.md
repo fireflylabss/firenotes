@@ -1,104 +1,142 @@
 # FireNotes
 
-Modern markdown editor for the FireflyLabs ecosystem.
+<div align="center">
 
-## Overview
+![FireNotes Logo](https://img.shields.io/badge/FireNotes-Markdown%20Editor-FF5722?style=for-the-badge&logo=markdown)
+![Svelte](https://img.shields.io/badge/Svelte-4-FF3E00?style=flat-square&logo=svelte)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)
+![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)
 
-FireNotes is a versatile markdown editor with two modes of operation:
-- **Standalone Mode**: Browser-based with localStorage (perfect for Vercel deployment)
-- **Core Mode**: Full-featured with Rust backend for advanced parsing and storage
+**A modern, distraction-free markdown editor built with Svelte**
 
-## Features
+✨ Live Preview • 🎨 Syntax Highlighting • 📑 Multi-Document • 🌙 Dark Mode • 💾 Auto-Save
 
-- 📝 Clean, distraction-free markdown editor
-- 👁️ Real-time preview with syntax highlighting
-- 📑 Multi-document support
-- 🌙 Dark mode
-- 💾 Auto-save
-- 🔀 Dual-mode operation (standalone/core)
-- 🔍 Full-text search
-- 📤 Export to multiple formats (Markdown, HTML, Plain text, JSON)
+</div>
 
-## Architecture
+---
+
+## 📖 About
+
+**FireNotes** is a modern, elegant markdown editor developed to provide a fluid and productive writing experience. It's a fork of [Aire](https://github.com/yourusername/aire) with an organized source structure.
+
+### 🎯 Features
+
+- ✍️ **Creative writing** - Articles, blog posts, technical documentation
+- 📝 **Notes** - Quick notes and personal organization
+- 📚 **Documentation** - Project documentation, READMEs, manuals
+- 💻 **Development** - Technical writing with code support
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+| Software | Minimum Version |
+|----------|---------------|
+| Node.js | v16.0.0+ |
+| npm | v8.0.0+ (or yarn/pnpm) |
+| Git | Any recent version |
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/firenotes.git
+
+# Enter the directory
+cd firenotes
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+### Accessing the Application
+
+After starting, the application will be available at:
+
+```
+http://localhost:5173
+```
+
+### Production Build
+
+```bash
+# Create the optimized build
+npm run build
+
+# Preview the build locally
+npm run preview
+```
+
+---
+
+## 🛠️ Technologies
+
+This project was built with the following technologies:
+
+### Frontend
+
+| Technology | Version | Purpose |
+|------------|--------|-----------|
+| [Svelte](https://svelte.dev/) | 4.x | Reactive framework |
+| [TypeScript](https://www.typescriptlang.org/) | 5.x | Static typing |
+| [Vite](https://vitejs.dev/) | 5.x | Bundler and dev server |
+
+### Libraries
+
+| Library | Version | Purpose |
+|------------|--------|-----------|
+| [Marked](https://marked.js.org/) | 11.x | Markdown Parser |
+| [highlight.js](https://highlightjs.org/) | 11.x | Syntax highlighting |
+| [lucide-svelte](https://lucide.dev/) | 0.x | SVG icons |
+| [KaTeX](https://katex.org/) | 0.x | Math rendering |
+
+---
+
+## 📊 Project Structure
 
 ```
 firenotes/
-├── firenotes-core/     # Rust library (document, parser, storage, export)
-├── firenotes-cli/      # Rust CLI + HTTP API server
-└── firenotes-ui/       # Svelte + TypeScript + Tailwind UI
+├── src/
+│   ├── components/       # Svelte components
+│   │   ├── EmojiPicker.svelte
+│   │   ├── CommandPalette.svelte
+│   │   └── SearchPanel.svelte
+│   ├── stores/           # Svelte stores (global state)
+│   │   └── stores.ts
+│   ├── styles/           # Global styles
+│   │   └── app.css
+│   ├── assets/           # Static assets
+│   │   └── svelte.svg
+│   ├── lib/              # Library components
+│   │   └── Counter.svelte
+│   ├── App.svelte        # Root component
+│   └── main.ts           # Entry point
+├── public/               # Static files
+├── index.html            # HTML template
+├── package.json
+├── svelte.config.js      # Svelte configuration
+├── vite.config.ts        # Vite configuration
+├── tsconfig.json         # TypeScript configuration
+└── README.md
 ```
 
-## Quick Start
+---
 
-### CLI (Core Mode)
-```bash
-# Build
-cargo build --release
+## 📜 License
 
-# Install
-cargo install --path .
+This project is licensed under the **GNU General Public License v3.0**.
 
-# Start API server
-firenotes ui --port 3000
+See the [LICENSE](LICENSE) file for more information.
 
-# CLI commands
-firenotes new "My Document"
-firenotes list
-firenotes show <uuid>
-```
+---
 
-### UI (Standalone Mode)
-```bash
-# Script conveniente
-./scripts/run-ui-standalone.sh
+<div align="center">
 
-# Ou manualmente
-cd firenotes-ui
-bun install      # ⚠️ SEMPRE usar bun
-bun run dev
-# Access http://localhost:3000
-```
+⭐️ If this project was useful, consider giving it a star!
 
-### UI (Core Mode)
-```bash
-# ⚠️ IMPORTANTE: Modo core REQUER parâmetros na URL!
-
-# Script conveniente (backend + frontend)
-./scripts/run-ui-core.sh
-# Acessar: http://localhost:3000?mode=core&api=http://localhost:8080/api
-#
-# ⚠️ SEMPRE use os parâmetros ?mode=core&api=... na URL!
-# Sem os parâmetros, a UI usa modo standalone (localStorage).
-
-# Ou manualmente (2 terminais)
-# Terminal 1: Start backend
-firenotes ui --port 8080
-
-# Terminal 2: Start UI
-cd firenotes-ui
-bun install      # ⚠️ SEMPRE usar bun
-bun run dev
-# Acessar: http://localhost:3000?mode=core&api=http://localhost:8080/api
-```
-
-## Modes
-
-### Standalone Mode
-- Uses localStorage for persistence
-- No backend required
-- Perfect for Vercel/Netlify deployment
-- Markdown parsing with marked.js
-
-### Core Mode
-- Uses Rust backend via HTTP API
-- Advanced parsing with comrak
-- Filesystem storage following FireflyLabs patterns
-- Better performance and features
-
-## Development
-
-See [AGENTS.md](./AGENTS.md) for detailed development rules and guidelines.
-
-## License
-
-MIT
+</div>
